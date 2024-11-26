@@ -5,17 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.github.fruitcropxl</groupId>
-  <artifactId>output</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>fruitcropxl-output</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 
-  <name>modelling</name>
+  <name>output</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <repositories>
     <repository>
-      <id>modelling-example.local</id>
-      <name>modelling-example</name>
+      <id>fruitcropxl-config.local</id>
+      <name>fruitcropxl-config</name>
       <url>file:${project.basedir}/repo</url>
     </repository>
   </repositories>
