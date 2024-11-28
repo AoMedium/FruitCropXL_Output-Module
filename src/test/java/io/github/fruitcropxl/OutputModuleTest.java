@@ -1,17 +1,23 @@
 package io.github.fruitcropxl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
 
 import io.github.fruitcropxl.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
 
-public class App {
-    public static void main(String[] args) {
+public class OutputModuleTest {
+
+    @Test
+    void testPrint() {
         List<Iris> irisList = new ArrayList<Iris>();
         int max = 20;
         for (int i = 0; i < max; i++) {
@@ -56,4 +62,5 @@ public class App {
             System.out.println(ex);
         }
     }
+
 }
