@@ -16,6 +16,7 @@ import jakarta.validation.constraints.NotNull;
 @JsonRootName("fruit")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Fruit {
+    @JsonProperty(value = "id", index = 0)
     @JsonPropertyDescription("The unique identifier")
     @NotNull
     @Min(0)
@@ -24,7 +25,7 @@ public class Fruit {
     @Tags({ "example_tag", "another_tag" })
     public int id = 0;
 
-    @JsonProperty(value = "property1", index = 2)
+    @JsonProperty(value = "property1", index = 1)
     @JsonPropertyDescription("Property 1")
     @NotNull
     @Min(0)

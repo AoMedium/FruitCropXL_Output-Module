@@ -1,8 +1,5 @@
 package io.github.fruitcropxl;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +7,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
@@ -19,7 +15,7 @@ import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
 import io.github.fruitcropxl.model.Fruit;
 import io.github.fruitcropxl.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
-import io.github.fruitcropxl.util.StepwiseCsvWriter;
+import io.github.fruitcropxl.output.util.StepwiseCsvWriter;
 
 public class OutputModuleTest {
 
@@ -49,28 +45,27 @@ public class OutputModuleTest {
         String irisFilePath = "target/iris.csv";
         String fruitFilePath = "target/fruit.csv";
 
-        CsvSchema irisSchema = new CsvMapper().schemaFor(Iris.class)
-                .withQuoteChar('\"')
-                .withColumnSeparator(',');
-
-        CsvSchema fruitSchema = new CsvMapper().schemaFor(Fruit.class)
-                .withQuoteChar('\"')
-                .withColumnSeparator(',');
-
         Map<String, StepwiseCsvWriter> csvWriters = new HashMap<>();
 
-        csvWriters.put(irisFilePath, new StepwiseCsvWriter(irisFilePath, irisSchema));
-        csvWriters.put(fruitFilePath, new StepwiseCsvWriter(fruitFilePath, fruitSchema));
+        csvWriters.put(irisFilePath, new StepwiseCsvWriter(irisFilePath, Iris.class));
+        csvWriters.put(fruitFilePath, new StepwiseCsvWriter(fruitFilePath, Fruit.class));
 
         StepwiseCsvWriter irisWriter = csvWriters.get(irisFilePath);
+        irisWriter.getSchema()
+                .withQuoteChar('\"')
+                .withColumnSeparator(',');
+
         StepwiseCsvWriter fruitWriter = csvWriters.get(fruitFilePath);
+        fruitWriter.getSchema()
+                .withQuoteChar('\"')
+                .withColumnSeparator(';');
 
         for (Iris iris : irisList) {
-            irisWriter.writeStep(iris);
+            irisWriter.append(iris);
         }
 
         for (Fruit fruit : fruitList) {
-            fruitWriter.writeStep(fruit);
+            fruitWriter.append(fruit);
         }
     }
 
