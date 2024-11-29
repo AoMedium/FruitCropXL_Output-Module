@@ -11,10 +11,10 @@ import io.github.fruitcropxl.output.util.StepwiseCsvWriter;
 public class StepwiseCsvWriterTest {
     @Test
     public void testWriteInvalidPojo() {
-        StepwiseCsvWriter writer = new StepwiseCsvWriter("target/invalid.csv", Iris.class);
+        StepwiseCsvWriter writer = new StepwiseCsvWriter("target/test-output/invalid.csv", Iris.class);
 
         try {
-            writer.writeStep(new Fruit(0, 0));
+            writer.append(new Fruit(0, 0));
             fail("Should have produced RuntimeException from writing Fruit out as Iris");
         } catch (RuntimeException e) {
         }

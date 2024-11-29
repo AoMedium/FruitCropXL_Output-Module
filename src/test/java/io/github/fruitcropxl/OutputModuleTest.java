@@ -42,8 +42,8 @@ public class OutputModuleTest {
 
         System.out.println("============ SINGLE CSV\n");
 
-        String irisFilePath = "target/iris.csv";
-        String fruitFilePath = "target/fruit.csv";
+        String irisFilePath = "target/test-output/iris.csv";
+        String fruitFilePath = "target/test-output/fruit.csv";
 
         Map<String, StepwiseCsvWriter> csvWriters = new HashMap<>();
 
