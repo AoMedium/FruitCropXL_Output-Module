@@ -15,6 +15,7 @@ import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
 import io.github.fruitcropxl.model.Fruit;
 import io.github.fruitcropxl.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
+import io.github.fruitcropxl.output.util.SchemaMetadataWriter;
 import io.github.fruitcropxl.output.util.StepwiseCsvWriter;
 
 public class OutputModuleTest {
@@ -42,20 +43,20 @@ public class OutputModuleTest {
 
         System.out.println("============ SINGLE CSV\n");
 
-        String irisFilePath = "target/test-output/iris.csv";
-        String fruitFilePath = "target/test-output/fruit.csv";
+        String irisCsvFilePath = "target/iris.csv";
+        String fruitCsvFilePath = "target/fruit.csv";
 
         Map<String, StepwiseCsvWriter> csvWriters = new HashMap<>();
 
-        csvWriters.put(irisFilePath, new StepwiseCsvWriter(irisFilePath, Iris.class));
-        csvWriters.put(fruitFilePath, new StepwiseCsvWriter(fruitFilePath, Fruit.class));
+        csvWriters.put(irisCsvFilePath, new StepwiseCsvWriter(irisCsvFilePath, Iris.class));
+        csvWriters.put(fruitCsvFilePath, new StepwiseCsvWriter(fruitCsvFilePath, Fruit.class));
 
-        StepwiseCsvWriter irisWriter = csvWriters.get(irisFilePath);
+        StepwiseCsvWriter irisWriter = csvWriters.get(irisCsvFilePath);
         irisWriter.getSchema()
                 .withQuoteChar('\"')
                 .withColumnSeparator(',');
 
-        StepwiseCsvWriter fruitWriter = csvWriters.get(fruitFilePath);
+        StepwiseCsvWriter fruitWriter = csvWriters.get(fruitCsvFilePath);
         fruitWriter.getSchema()
                 .withQuoteChar('\"')
                 .withColumnSeparator(';');
@@ -67,6 +68,15 @@ public class OutputModuleTest {
         for (Fruit fruit : fruitList) {
             fruitWriter.append(fruit);
         }
+
+        String irisMetadataFilePath = "target/iris.json";
+        String fruitMetadataFilePath = "target/fruit.json";
+
+        SchemaMetadataWriter irisMetadataWriter = new SchemaMetadataWriter(irisMetadataFilePath, Iris.class);
+        SchemaMetadataWriter fruitMetadataWriter = new SchemaMetadataWriter(fruitMetadataFilePath, Fruit.class);
+
+        irisMetadataWriter.writeMetadata();
+        fruitMetadataWriter.writeMetadata();
     }
 
     protected static void printJson(List<Iris> irisList) {
