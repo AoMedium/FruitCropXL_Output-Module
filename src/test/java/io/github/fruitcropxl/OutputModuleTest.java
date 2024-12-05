@@ -12,6 +12,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
 
+import io.github.fruitcropxl.model.ExtendedFruit;
 import io.github.fruitcropxl.model.Fruit;
 import io.github.fruitcropxl.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
@@ -38,6 +39,13 @@ public class OutputModuleTest {
             fruitList.add(fruitInstance);
         }
 
+        List<ExtendedFruit> fruit2List = new ArrayList<>();
+        for (int i = 0; i < max; i++) {
+            ExtendedFruit fruit2Instance = new ExtendedFruit(
+                    i, i + 1, i + 2);
+            fruit2List.add(fruit2Instance);
+        }
+
         printJson(irisList);
         printCsv(irisList);
 
@@ -45,11 +53,13 @@ public class OutputModuleTest {
 
         String irisCsvFilePath = "target/iris.csv";
         String fruitCsvFilePath = "target/fruit.csv";
+        String fruit2CsvFilePath = "target/fruit2.csv";
 
         Map<String, StepwiseCsvWriter> csvWriters = new HashMap<>();
 
         csvWriters.put(irisCsvFilePath, new StepwiseCsvWriter(irisCsvFilePath, Iris.class));
         csvWriters.put(fruitCsvFilePath, new StepwiseCsvWriter(fruitCsvFilePath, Fruit.class));
+        csvWriters.put(fruit2CsvFilePath, new StepwiseCsvWriter(fruitCsvFilePath, ExtendedFruit.class));
 
         StepwiseCsvWriter irisWriter = csvWriters.get(irisCsvFilePath);
         irisWriter.getSchema()
@@ -61,6 +71,11 @@ public class OutputModuleTest {
                 .withQuoteChar('\"')
                 .withColumnSeparator(';');
 
+        StepwiseCsvWriter fruit2Writer = csvWriters.get(fruit2CsvFilePath);
+        fruit2Writer.getSchema()
+                .withQuoteChar('\"')
+                .withColumnSeparator(';');
+
         for (Iris iris : irisList) {
             irisWriter.append(iris);
         }
@@ -68,6 +83,12 @@ public class OutputModuleTest {
         for (Fruit fruit : fruitList) {
             fruitWriter.append(fruit);
         }
+
+        for (ExtendedFruit fruit2 : fruit2List) {
+            fruitWriter.append(fruit2);
+        }
+
+        // =============
 
         String irisMetadataFilePath = "target/iris.json";
         String fruitMetadataFilePath = "target/fruit.json";

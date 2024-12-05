@@ -78,7 +78,7 @@ public class StepwiseCsvWriter {
      */
     public void append(Object object) {
         // Check if object is the appropriate type defined in the schema
-        if (!object.getClass().equals(pojoType)) {
+        if (!pojoType.isInstance(object)) {
             throw new RuntimeException(object + " is not the correct class type: " + pojoType.getSimpleName());
         }
 
@@ -98,24 +98,14 @@ public class StepwiseCsvWriter {
         }
     }
 
-    private String getHeader() {
-        try {
-            String headers = new CsvMapper().writer(schema.withHeader()).writeValueAsString(null);
-            schema.withoutHeader(); // Reset to no headers
+    private String getHeader() throws JsonProcessingException {
+        String headers = new CsvMapper().writer(schema.withHeader()).writeValueAsString(null);
+        schema.withoutHeader(); // Reset to no headers
 
-            return headers;
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return headers;
     }
 
-    private String getHeaderlessCsv(Object object) {
-        try {
-            return new CsvMapper().writer().with(schema.withoutHeader()).writeValueAsString(object);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
+    private String getHeaderlessCsv(Object object) throws JsonProcessingException {
+        return new CsvMapper().writer().with(schema.withoutHeader()).writeValueAsString(object);
     }
 }
