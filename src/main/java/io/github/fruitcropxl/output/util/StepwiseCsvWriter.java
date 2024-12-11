@@ -59,17 +59,21 @@ public class StepwiseCsvWriter {
         this.filePath = filePath;
         this.pojoType = pojoType;
         this.mapper = new CsvMapper();
-        this.schema = this.mapper.schemaFor(pojoType);
-
-        writeHeader();
+        this.setMapper(this.mapper);
     }
 
     public String getId() {
         return id;
     }
 
-    public CsvMapper getMapper() {
-        return mapper;
+    /**
+     * Mapper may have its visibility updated, which requires the schema to be recreated.
+     */
+    public void setMapper(CsvMapper mapper) {
+        this.mapper = mapper;
+        schema = this.mapper.schemaFor(pojoType);
+
+        writeHeader();
     }
 
     public CsvSchema getSchema() {
@@ -109,13 +113,13 @@ public class StepwiseCsvWriter {
     }
 
     private String getHeader() throws JsonProcessingException {
-        String headers = new CsvMapper().writer(schema.withHeader()).writeValueAsString(null);
+        String headers = mapper.writer(schema.withHeader()).writeValueAsString(null);
         schema.withoutHeader(); // Reset to no headers
 
         return headers;
     }
 
     private String getHeaderlessCsv(Object object) throws JsonProcessingException {
-        return new CsvMapper().writer().with(schema.withoutHeader()).writeValueAsString(object);
+        return mapper.writer().with(schema.withoutHeader()).writeValueAsString(object);
     }
 }
