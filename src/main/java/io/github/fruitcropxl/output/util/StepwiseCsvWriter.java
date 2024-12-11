@@ -62,6 +62,21 @@ public class StepwiseCsvWriter {
         this.setMapper(this.mapper);
     }
 
+    public static void write(Object object, String filePath, CsvMapper mapper) {
+        /**
+         * create schema from mapper
+         * 
+         * if file does not exists
+         *  create file
+         *  write header
+         * 
+         * write to file
+         */
+
+        CsvSchema schema = mapper.schemaFor(object.getClass());
+        
+    }
+
     public String getId() {
         return id;
     }
