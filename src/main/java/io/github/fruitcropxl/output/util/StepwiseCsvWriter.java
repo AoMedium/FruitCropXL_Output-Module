@@ -30,6 +30,11 @@ public class StepwiseCsvWriter {
     private Class pojoType;
 
     /**
+     * The CsvMapper used for writing the output.
+     */
+    private CsvMapper mapper;
+
+    /**
      * The schema representing the POJO type.
      */
     private CsvSchema schema;
@@ -53,13 +58,18 @@ public class StepwiseCsvWriter {
         this.id = id;
         this.filePath = filePath;
         this.pojoType = pojoType;
-        this.schema = new CsvMapper().schemaFor(pojoType);
+        this.mapper = new CsvMapper();
+        this.schema = this.mapper.schemaFor(pojoType);
 
         writeHeader();
     }
 
     public String getId() {
         return id;
+    }
+
+    public CsvMapper getMapper() {
+        return mapper;
     }
 
     public CsvSchema getSchema() {
