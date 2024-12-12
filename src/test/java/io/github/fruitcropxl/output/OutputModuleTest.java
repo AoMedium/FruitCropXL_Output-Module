@@ -1,4 +1,4 @@
-package io.github.fruitcropxl;
+package io.github.fruitcropxl.output;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
 
-import io.github.fruitcropxl.model.ExtendedFruit;
-import io.github.fruitcropxl.model.Fruit;
-import io.github.fruitcropxl.model.Iris;
+import io.github.fruitcropxl.output.model.ExtendedFruit;
+import io.github.fruitcropxl.output.model.Fruit;
+import io.github.fruitcropxl.output.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
 import io.github.fruitcropxl.output.util.SchemaMetadataWriter;
 import io.github.fruitcropxl.output.util.StepwiseCsvWriter;

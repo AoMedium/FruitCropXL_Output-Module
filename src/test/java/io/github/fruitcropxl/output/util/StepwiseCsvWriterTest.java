@@ -1,4 +1,4 @@
-package io.github.fruitcropxl.util;
+package io.github.fruitcropxl.output.util;
 
 import static org.junit.Assert.fail;
 
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 
-import io.github.fruitcropxl.model.Fruit;
-import io.github.fruitcropxl.model.Iris;
+import io.github.fruitcropxl.output.model.Fruit;
+import io.github.fruitcropxl.output.model.Iris;
 import io.github.fruitcropxl.output.util.StepwiseCsvWriter;
 
 public class StepwiseCsvWriterTest {
