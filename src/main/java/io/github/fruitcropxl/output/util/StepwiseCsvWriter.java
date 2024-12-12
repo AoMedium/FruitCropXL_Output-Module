@@ -1,5 +1,6 @@
 package io.github.fruitcropxl.output.util;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -62,19 +63,43 @@ public class StepwiseCsvWriter {
         this.setMapper(this.mapper);
     }
 
+    /**
+     * Write object to CSV without needing to setup the writer.
+     * 
+     * @param object
+     * @param filePath
+     * @param mapper
+     */
     public static void write(Object object, String filePath, CsvMapper mapper) {
-        /**
-         * create schema from mapper
-         * 
-         * if file does not exists
-         *  create file
-         *  write header
-         * 
-         * write to file
-         */
+
+        File file = new File(filePath);
+        boolean fileExist = file.isFile(); // Check here as FileWriter creates a file
 
         CsvSchema schema = mapper.schemaFor(object.getClass());
-        
+
+        try (FileWriter fileWriter = new FileWriter(filePath, true)) {
+            if (!fileExist) { // Write header if writing to a new file
+                fileWriter.write(StepwiseCsvWriter.getHeader(mapper, schema)); // Write header
+            }
+
+            fileWriter.append(StepwiseCsvWriter.getHeaderlessCsv(object, mapper, schema));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Delete file if the condition is satisfied. Useful for clearing
+     * data at the start of a simulation.
+     * 
+     * @param condition
+     * @param filePath
+     */
+    public static void deleteIf(boolean condition, String filePath) {
+        if (condition) {
+            File file = new File(filePath);
+            file.delete();
+        }
     }
 
     public String getId() {
@@ -82,7 +107,8 @@ public class StepwiseCsvWriter {
     }
 
     /**
-     * Mapper may have its visibility updated, which requires the schema to be recreated.
+     * Mapper may have its visibility updated, which requires the schema to be
+     * recreated.
      */
     public void setMapper(CsvMapper mapper) {
         this.mapper = mapper;
@@ -106,35 +132,44 @@ public class StepwiseCsvWriter {
      * @param object
      */
     public void append(Object object) {
-        // Check if object is the appropriate type defined in the schema
-        if (!pojoType.isInstance(object)) {
-            throw new RuntimeException(object + " is not the correct class type: " + pojoType.getSimpleName());
-        }
+        checkValidObject(object, pojoType);
 
-        try (FileWriter fileWriter = new FileWriter(filePath, true)) {
-            fileWriter.append(getHeaderlessCsv(object));
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
+            fileWriter.append(StepwiseCsvWriter.getHeaderlessCsv(object, mapper, schema));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     * Check if object is the appropriate type defined in the schema.
+     * 
+     * @param object
+     * @param pojoType
+     */
+    private static void checkValidObject(Object object, Class pojoType) {
+        if (!pojoType.isInstance(object)) {
+            throw new RuntimeException(object + " is not the correct class type: " + pojoType.getSimpleName());
+        }
     }
 
     private void writeHeader() {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
-            fileWriter.write(getHeader()); // Write header
+            fileWriter.write(StepwiseCsvWriter.getHeader(mapper, schema)); // Write header
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private String getHeader() throws JsonProcessingException {
+    private static String getHeader(CsvMapper mapper, CsvSchema schema) throws JsonProcessingException {
         String headers = mapper.writer(schema.withHeader()).writeValueAsString(null);
         schema.withoutHeader(); // Reset to no headers
 
         return headers;
     }
 
-    private String getHeaderlessCsv(Object object) throws JsonProcessingException {
+    private static String getHeaderlessCsv(Object object, CsvMapper mapper, CsvSchema schema)
+            throws JsonProcessingException {
         return mapper.writer().with(schema.withoutHeader()).writeValueAsString(object);
     }
 }
