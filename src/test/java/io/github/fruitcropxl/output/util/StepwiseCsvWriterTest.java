@@ -1,38 +1,58 @@
 package io.github.fruitcropxl.output.util;
 
-import static org.junit.Assert.fail;
-
-import java.io.File;
-
 import org.junit.Test;
 
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 
 import io.github.fruitcropxl.output.model.Fruit;
 import io.github.fruitcropxl.output.model.Iris;
-import io.github.fruitcropxl.output.util.StepwiseCsvWriter;
 
 public class StepwiseCsvWriterTest {
     @Test
-    public void testWriteInvalidPojo() {
-        StepwiseCsvWriter writer = new StepwiseCsvWriter("target/invalid.csv", Iris.class);
+    public void testBasicWrite() {
+        CsvMapper mapper = new CsvMapper();
 
-        try {
-            writer.append(new Fruit(0, 0));
-            fail("Should have produced RuntimeException from writing Fruit out as Iris");
-        } catch (RuntimeException e) {
+        for (int i = 0; i < 5; i++) {
+            (new StepwiseCsvWriter("target/fruit-basic.csv", mapper))
+                    .deleteFileIf(i == 0)
+                    .write(new Fruit(i, i * i));
+        }
+
+        for (int i = 0; i < 5; i++) {
+            (new StepwiseCsvWriter("target/iris-basic.csv", mapper))
+                    .deleteFileIf(i == 0)
+                    .write(new Iris(i, i * 1, i * 2, i * 3, i * 4));
         }
     }
 
     @Test
-    public void testStaticWrite() {
+    public void testSchemaConfiguration() {
         CsvMapper mapper = new CsvMapper();
+        mapper.setVisibility(PropertyAccessor.ALL, Visibility.NONE);
+        mapper.setVisibility(PropertyAccessor.FIELD, Visibility.DEFAULT);
 
-        String filePath = "target/static-write.csv";
+        String filePath = "target/static-write-config.csv";
+
+        StepwiseCsvWriter writer = new StepwiseCsvWriter(filePath, mapper)
+                .setSchema(mapper.schemaFor(Fruit.class)
+                        .withQuoteChar('/')
+                        .withComments()
+                        .withLineSeparator(";"));
 
         for (int i = 0; i < 5; i++) {
-            StepwiseCsvWriter.deleteIf(i == 0, filePath);
-            StepwiseCsvWriter.write(new Fruit(i, i * i), filePath, mapper);
+            writer.deleteFileIf(i == 0)
+                    .write(new Fruit(i, i * i));
+        }
+
+        writer.setSchema(mapper.schemaFor(Fruit.class)
+                .withQuoteChar('/')
+                .withComments()
+                .withLineSeparator("\n"));
+
+        for (int i = 0; i < 5; i++) {
+            writer.write(new Fruit(i, i * i));
         }
     }
 }

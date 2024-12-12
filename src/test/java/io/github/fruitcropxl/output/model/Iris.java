@@ -1,4 +1,4 @@
-package io.github.fruitcropxl.model;
+package io.github.fruitcropxl.output.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;

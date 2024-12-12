@@ -17,7 +17,7 @@ import io.github.fruitcropxl.output.model.Fruit;
 import io.github.fruitcropxl.output.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
 import io.github.fruitcropxl.output.util.SchemaMetadataWriter;
-import io.github.fruitcropxl.output.util.StepwiseCsvWriter;
+import io.github.fruitcropxl.output.util.CsvSteppingWriter;
 
 public class OutputModuleTest {
 
@@ -55,23 +55,23 @@ public class OutputModuleTest {
         String fruitCsvFilePath = "target/fruit.csv";
         String fruit2CsvFilePath = "target/fruit2.csv";
 
-        Map<String, StepwiseCsvWriter> csvWriters = new HashMap<>();
+        Map<String, CsvSteppingWriter> csvWriters = new HashMap<>();
 
-        csvWriters.put(irisCsvFilePath, new StepwiseCsvWriter(irisCsvFilePath, Iris.class));
-        csvWriters.put(fruitCsvFilePath, new StepwiseCsvWriter(fruitCsvFilePath, Fruit.class));
-        csvWriters.put(fruit2CsvFilePath, new StepwiseCsvWriter(fruitCsvFilePath, ExtendedFruit.class));
+        csvWriters.put(irisCsvFilePath, new CsvSteppingWriter(irisCsvFilePath, Iris.class));
+        csvWriters.put(fruitCsvFilePath, new CsvSteppingWriter(fruitCsvFilePath, Fruit.class));
+        csvWriters.put(fruit2CsvFilePath, new CsvSteppingWriter(fruitCsvFilePath, ExtendedFruit.class));
 
-        StepwiseCsvWriter irisWriter = csvWriters.get(irisCsvFilePath);
+        CsvSteppingWriter irisWriter = csvWriters.get(irisCsvFilePath);
         irisWriter.getSchema()
                 .withQuoteChar('\"')
                 .withColumnSeparator(',');
 
-        StepwiseCsvWriter fruitWriter = csvWriters.get(fruitCsvFilePath);
+        CsvSteppingWriter fruitWriter = csvWriters.get(fruitCsvFilePath);
         fruitWriter.getSchema()
                 .withQuoteChar('\"')
                 .withColumnSeparator(';');
 
-        StepwiseCsvWriter fruit2Writer = csvWriters.get(fruit2CsvFilePath);
+        CsvSteppingWriter fruit2Writer = csvWriters.get(fruit2CsvFilePath);
         fruit2Writer.getSchema()
                 .withQuoteChar('\"')
                 .withColumnSeparator(';');
