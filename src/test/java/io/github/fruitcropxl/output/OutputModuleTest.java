@@ -1,10 +1,7 @@
 package io.github.fruitcropxl.output;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +14,6 @@ import io.github.fruitcropxl.output.model.Fruit;
 import io.github.fruitcropxl.output.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
 import io.github.fruitcropxl.output.util.SchemaMetadataWriter;
-import io.github.fruitcropxl.output.util.CsvSteppingWriter;
 
 public class OutputModuleTest {
 
@@ -48,45 +44,6 @@ public class OutputModuleTest {
 
         printJson(irisList);
         printCsv(irisList);
-
-        System.out.println("============ SINGLE CSV\n");
-
-        String irisCsvFilePath = "target/iris.csv";
-        String fruitCsvFilePath = "target/fruit.csv";
-        String fruit2CsvFilePath = "target/fruit2.csv";
-
-        Map<String, CsvSteppingWriter> csvWriters = new HashMap<>();
-
-        csvWriters.put(irisCsvFilePath, new CsvSteppingWriter(irisCsvFilePath, Iris.class));
-        csvWriters.put(fruitCsvFilePath, new CsvSteppingWriter(fruitCsvFilePath, Fruit.class));
-        csvWriters.put(fruit2CsvFilePath, new CsvSteppingWriter(fruitCsvFilePath, ExtendedFruit.class));
-
-        CsvSteppingWriter irisWriter = csvWriters.get(irisCsvFilePath);
-        irisWriter.getSchema()
-                .withQuoteChar('\"')
-                .withColumnSeparator(',');
-
-        CsvSteppingWriter fruitWriter = csvWriters.get(fruitCsvFilePath);
-        fruitWriter.getSchema()
-                .withQuoteChar('\"')
-                .withColumnSeparator(';');
-
-        CsvSteppingWriter fruit2Writer = csvWriters.get(fruit2CsvFilePath);
-        fruit2Writer.getSchema()
-                .withQuoteChar('\"')
-                .withColumnSeparator(';');
-
-        for (Iris iris : irisList) {
-            irisWriter.append(iris);
-        }
-
-        for (Fruit fruit : fruitList) {
-            fruitWriter.append(fruit);
-        }
-
-        for (ExtendedFruit fruit2 : fruit2List) {
-            fruitWriter.append(fruit2);
-        }
 
         // =============
 

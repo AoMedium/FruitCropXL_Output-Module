@@ -22,6 +22,7 @@ public class SchemaMetadataWriter {
      * The class of the POJO type to write out.
      * Specify class to avoid using generics as GroIMP does not support them.
      */
+    @SuppressWarnings("rawtypes")
     private Class pojoType;
 
     /**
@@ -29,7 +30,7 @@ public class SchemaMetadataWriter {
      * @param filePath Path to the metadata file.
      * @param pojoType The class of the POJO type to write out.
      */
-    public SchemaMetadataWriter(String filePath, Class pojoType) {
+    public SchemaMetadataWriter(String filePath, @SuppressWarnings("rawtypes") Class pojoType) {
         this.filePath = filePath;
         this.pojoType = pojoType;
     }
