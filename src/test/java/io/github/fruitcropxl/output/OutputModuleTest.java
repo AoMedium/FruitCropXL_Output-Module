@@ -1,10 +1,7 @@
-package io.github.fruitcropxl;
+package io.github.fruitcropxl.output;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,11 +9,11 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
 
-import io.github.fruitcropxl.model.Fruit;
-import io.github.fruitcropxl.model.Iris;
+import io.github.fruitcropxl.output.model.ExtendedFruit;
+import io.github.fruitcropxl.output.model.Fruit;
+import io.github.fruitcropxl.output.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
 import io.github.fruitcropxl.output.util.SchemaMetadataWriter;
-import io.github.fruitcropxl.output.util.StepwiseCsvWriter;
 
 public class OutputModuleTest {
 
@@ -38,36 +35,17 @@ public class OutputModuleTest {
             fruitList.add(fruitInstance);
         }
 
+        List<ExtendedFruit> fruit2List = new ArrayList<>();
+        for (int i = 0; i < max; i++) {
+            ExtendedFruit fruit2Instance = new ExtendedFruit(
+                    i, i + 1, i + 2);
+            fruit2List.add(fruit2Instance);
+        }
+
         printJson(irisList);
         printCsv(irisList);
 
-        System.out.println("============ SINGLE CSV\n");
-
-        String irisCsvFilePath = "target/iris.csv";
-        String fruitCsvFilePath = "target/fruit.csv";
-
-        Map<String, StepwiseCsvWriter> csvWriters = new HashMap<>();
-
-        csvWriters.put(irisCsvFilePath, new StepwiseCsvWriter(irisCsvFilePath, Iris.class));
-        csvWriters.put(fruitCsvFilePath, new StepwiseCsvWriter(fruitCsvFilePath, Fruit.class));
-
-        StepwiseCsvWriter irisWriter = csvWriters.get(irisCsvFilePath);
-        irisWriter.getSchema()
-                .withQuoteChar('\"')
-                .withColumnSeparator(',');
-
-        StepwiseCsvWriter fruitWriter = csvWriters.get(fruitCsvFilePath);
-        fruitWriter.getSchema()
-                .withQuoteChar('\"')
-                .withColumnSeparator(';');
-
-        for (Iris iris : irisList) {
-            irisWriter.append(iris);
-        }
-
-        for (Fruit fruit : fruitList) {
-            fruitWriter.append(fruit);
-        }
+        // =============
 
         String irisMetadataFilePath = "target/iris.json";
         String fruitMetadataFilePath = "target/fruit.json";
