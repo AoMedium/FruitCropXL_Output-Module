@@ -3,6 +3,8 @@ package io.github.fruitcropxl.output.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -56,18 +58,35 @@ public class StepwiseCsvWriter {
         return this;
     }
 
+    public void writeArray(Object[] object) {
+        writeList(Arrays.asList(object)); // Convert and write as List
+    }
+
+    public void writeList(List<?> list) {
+        if (list.isEmpty()) {
+            try {
+                throw new Exception("Writing from an empty list");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
+        schema = mapper.schemaFor(list.get(0).getClass());
+        write(list);
+    }
+
     /**
      * Write object to CSV.
      * 
      * @param object
      */
-    public StepwiseCsvWriter write(Object object) {
-
-        boolean fileExist = file.isFile(); // Check here as FileWriter creates a file
-
+    public void write(Object object) {
         if (schema == null) {
             schema = mapper.schemaFor(object.getClass());
         }
+
+        boolean fileExist = file.isFile(); // Check here as FileWriter creates a file
 
         try (FileWriter fileWriter = new FileWriter(file.getPath(), true)) {
             if (!fileExist) { // Write header if writing to a new file
@@ -78,7 +97,6 @@ public class StepwiseCsvWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return this;
     }
 
     /**
