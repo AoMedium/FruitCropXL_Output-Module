@@ -1,0 +1,5 @@
+var ExtendedValidationSchemaFactoryWrapper_8java =
+[
+    [ "io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper", "classio_1_1github_1_1fruitcropxl_1_1output_1_1schema_1_1ExtendedValidationSchemaFactoryWrapper.html", "classio_1_1github_1_1fruitcropxl_1_1output_1_1schema_1_1ExtendedValidationSchemaFactoryWrapper" ],
+    [ "io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper.ExtendedValidationSchemaFactoryWrapperFactory", "classio_1_1github_1_1fruitcropxl_1_1output_1_1schema_1_1ExtendedValidationSchemaFactoryWrapper_1e7eae559d934ba7317cb3f21c41774d0.html", "classio_1_1github_1_1fruitcropxl_1_1output_1_1schema_1_1ExtendedValidationSchemaFactoryWrapper_1e7eae559d934ba7317cb3f21c41774d0" ]
+];

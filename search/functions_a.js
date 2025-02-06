@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['value_0',['value',['../interfaceio_1_1github_1_1fruitcropxl_1_1output_1_1annotation_1_1DefaultNumericValue_a40c15c31d8b9d88fc1088f6442f4cc0d.html#a40c15c31d8b9d88fc1088f6442f4cc0d',1,'io.github.fruitcropxl.output.annotation.DefaultNumericValue.value()'],['../interfaceio_1_1github_1_1fruitcropxl_1_1output_1_1annotation_1_1PropertyType_a5460dcdcd407c108cbdc420462066b17.html#a5460dcdcd407c108cbdc420462066b17',1,'io.github.fruitcropxl.output.annotation.PropertyType.value()'],['../interfaceio_1_1github_1_1fruitcropxl_1_1output_1_1annotation_1_1Tags_a4b14c7d098a4e1c56ed4ae3b7952aaec.html#a4b14c7d098a4e1c56ed4ae3b7952aaec',1,'io.github.fruitcropxl.output.annotation.Tags.value()'],['../interfaceio_1_1github_1_1fruitcropxl_1_1output_1_1annotation_1_1Unit_a02879c4e95a52f3dc52bd26c13cf6307.html#a02879c4e95a52f3dc52bd26c13cf6307',1,'io.github.fruitcropxl.output.annotation.Unit.value()']]]
+];

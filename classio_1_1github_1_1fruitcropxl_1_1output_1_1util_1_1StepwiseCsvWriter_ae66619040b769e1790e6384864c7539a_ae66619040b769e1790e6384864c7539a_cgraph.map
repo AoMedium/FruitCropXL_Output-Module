@@ -1,0 +1,8 @@
+<map id="io.github.fruitcropxl.output.util.StepwiseCsvWriter.write" name="io.github.fruitcropxl.output.util.StepwiseCsvWriter.write">
+<area shape="rect" id="Node000001" title="Write object to CSV." alt="" coords="5,37,231,77"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="64,38,61,28,69,18,89,13,118,11,152,13,170,21,168,26,151,19,118,16,89,18,72,23,66,29,69,36"/>
+<area shape="rect" id="Node000002" href="$classio_1_1github_1_1fruitcropxl_1_1output_1_1util_1_1StepwiseCsvWriter_a47e35b0957afadfd5c2a2e0519d4a936.html#a47e35b0957afadfd5c2a2e0519d4a936" title="Returns the CSV header for the schema." alt="" coords="299,5,525,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,42,285,36,285,42,231,48"/>
+<area shape="rect" id="Node000003" href="$classio_1_1github_1_1fruitcropxl_1_1output_1_1util_1_1StepwiseCsvWriter_af2f1007e507eb245dcb59959126debe9.html#af2f1007e507eb245dcb59959126debe9" title="Returns the object as CSV without a header row." alt="" coords="279,69,545,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="231,67,265,71,265,76,230,72"/>
+</map>

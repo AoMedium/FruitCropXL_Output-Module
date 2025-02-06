@@ -1,0 +1,7 @@
+<map id="io.github.fruitcropxl.output.util.SchemaMetadataWriter" name="io.github.fruitcropxl.output.util.SchemaMetadataWriter">
+<area shape="rect" id="Node000001" title="Handles writing the schema metadata of the given POJO type." alt="" coords="5,133,223,233"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="44,5,96,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,71,74,109,77,118,72,119,69,110,65,71"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="133,5,183,71"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="151,72,136,119,131,117,146,70"/>
+</map>

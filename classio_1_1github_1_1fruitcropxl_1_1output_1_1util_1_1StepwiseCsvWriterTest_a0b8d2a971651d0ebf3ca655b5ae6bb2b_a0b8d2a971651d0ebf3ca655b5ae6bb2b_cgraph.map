@@ -1,0 +1,14 @@
+<map id="io.github.fruitcropxl.output.util.StepwiseCsvWriterTest.testSchemaConfiguration" name="io.github.fruitcropxl.output.util.StepwiseCsvWriterTest.testSchemaConfiguration">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,69,344,109"/>
+<area shape="rect" id="Node000002" href="$classio_1_1github_1_1fruitcropxl_1_1output_1_1util_1_1StepwiseCsvWriter_a3e22686bbf93720dd20b905c88061583.html#a3e22686bbf93720dd20b905c88061583" title="Delete file if the condition is satisfied." alt="" coords="392,5,617,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="278,67,387,45,388,51,279,72"/>
+<area shape="rect" id="Node000003" href="$classio_1_1github_1_1fruitcropxl_1_1output_1_1util_1_1StepwiseCsvWriter_a078ea2c2a5611733074fe2186426c87e.html#a078ea2c2a5611733074fe2186426c87e" title="Change schema configuration." alt="" coords="392,69,617,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="344,87,378,87,378,92,344,92"/>
+<area shape="rect" id="Node000004" href="$classio_1_1github_1_1fruitcropxl_1_1output_1_1util_1_1StepwiseCsvWriter_ae66619040b769e1790e6384864c7539a.html#ae66619040b769e1790e6384864c7539a" title="Write object to CSV." alt="" coords="392,157,617,197"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="251,107,416,151,414,156,250,112"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="451,158,447,148,456,138,475,133,505,131,539,133,557,141,555,146,537,139,505,136,476,138,459,143,452,149,456,156"/>
+<area shape="rect" id="Node000005" href="$classio_1_1github_1_1fruitcropxl_1_1output_1_1util_1_1StepwiseCsvWriter_a47e35b0957afadfd5c2a2e0519d4a936.html#a47e35b0957afadfd5c2a2e0519d4a936" title="Returns the CSV header for the schema." alt="" coords="686,125,911,165"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="617,162,671,156,672,162,618,168"/>
+<area shape="rect" id="Node000006" href="$classio_1_1github_1_1fruitcropxl_1_1output_1_1util_1_1StepwiseCsvWriter_af2f1007e507eb245dcb59959126debe9.html#af2f1007e507eb245dcb59959126debe9" title="Returns the object as CSV without a header row." alt="" coords="665,189,932,229"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="618,187,652,191,651,196,617,192"/>
+</map>
