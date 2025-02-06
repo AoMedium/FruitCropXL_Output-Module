@@ -1,0 +1,42 @@
+name: Documentation
+
+on:
+  workflow_dispatch: {}
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - src/**
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  auto-docs:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 16
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Install packages
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get -yq update
+          sudo apt-get -yq install graphviz doxygen
+      - name: Build documentation
+        run: |
+          cd docs/doxygen
+          doxygen
+          mv html ../../
+      - name: Deploy to GitHub pages 🚀
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          clean: false
+          branch: gh-pages
+          folder: html
