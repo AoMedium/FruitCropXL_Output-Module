@@ -25,18 +25,21 @@ public class SchemaMetadataWriter {
     @SuppressWarnings("rawtypes")
     private Class pojoType;
 
+    private ObjectMapper mapper;
+
     /**
      * 
      * @param filePath Path to the metadata file.
      * @param pojoType The class of the POJO type to write out.
+     * @param mapper   Mapper to use for reading objects.
      */
-    public SchemaMetadataWriter(String filePath, @SuppressWarnings("rawtypes") Class pojoType) {
+    public SchemaMetadataWriter(String filePath, @SuppressWarnings("rawtypes") Class pojoType, ObjectMapper mapper) {
         this.filePath = filePath;
         this.pojoType = pojoType;
+        this.mapper = mapper;
     }
 
     public void writeMetadata() {
-        ObjectMapper mapper = new ObjectMapper();
         ExtendedValidationSchemaFactoryWrapper schema = new ExtendedValidationSchemaFactoryWrapper();
 
         try (FileWriter fileWriter = new FileWriter(filePath)) {

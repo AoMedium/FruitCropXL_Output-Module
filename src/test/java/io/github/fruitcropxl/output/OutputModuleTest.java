@@ -44,17 +44,6 @@ public class OutputModuleTest {
 
         printJson(irisList);
         printCsv(irisList);
-
-        // =============
-
-        String irisMetadataFilePath = "target/iris.json";
-        String fruitMetadataFilePath = "target/fruit.json";
-
-        SchemaMetadataWriter irisMetadataWriter = new SchemaMetadataWriter(irisMetadataFilePath, Iris.class);
-        SchemaMetadataWriter fruitMetadataWriter = new SchemaMetadataWriter(fruitMetadataFilePath, Fruit.class);
-
-        irisMetadataWriter.writeMetadata();
-        fruitMetadataWriter.writeMetadata();
     }
 
     protected static void printJson(List<Iris> irisList) {
