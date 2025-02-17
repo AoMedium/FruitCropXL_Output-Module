@@ -13,7 +13,6 @@ import io.github.fruitcropxl.output.model.ExtendedFruit;
 import io.github.fruitcropxl.output.model.Fruit;
 import io.github.fruitcropxl.output.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
-import io.github.fruitcropxl.output.util.SchemaMetadataWriter;
 
 public class OutputModuleTest {
 
