@@ -13,7 +13,6 @@ import io.github.fruitcropxl.output.model.ExtendedFruit;
 import io.github.fruitcropxl.output.model.Fruit;
 import io.github.fruitcropxl.output.model.Iris;
 import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrapper;
-import io.github.fruitcropxl.output.util.SchemaMetadataWriter;
 
 public class OutputModuleTest {
 
@@ -44,17 +43,6 @@ public class OutputModuleTest {
 
         printJson(irisList);
         printCsv(irisList);
-
-        // =============
-
-        String irisMetadataFilePath = "target/iris.json";
-        String fruitMetadataFilePath = "target/fruit.json";
-
-        SchemaMetadataWriter irisMetadataWriter = new SchemaMetadataWriter(irisMetadataFilePath, Iris.class);
-        SchemaMetadataWriter fruitMetadataWriter = new SchemaMetadataWriter(fruitMetadataFilePath, Fruit.class);
-
-        irisMetadataWriter.writeMetadata();
-        fruitMetadataWriter.writeMetadata();
     }
 
     protected static void printJson(List<Iris> irisList) {
