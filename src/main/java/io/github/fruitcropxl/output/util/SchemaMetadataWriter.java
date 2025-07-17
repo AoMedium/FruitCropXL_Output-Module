@@ -1,6 +1,7 @@
 package io.github.fruitcropxl.output.util;
 
 import java.io.FileWriter;
+import java.io.Serializable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.jsonSchema.jakarta.JsonSchema;
@@ -11,7 +12,7 @@ import io.github.fruitcropxl.output.schema.ExtendedValidationSchemaFactoryWrappe
  * Handles writing the schema metadata of the given POJO type.
  * Each writer should only be responsible for writing to one file.
  */
-public class SchemaMetadataWriter {
+public class SchemaMetadataWriter implements Serializable {
 
     /**
      * Path to the metadata file.
