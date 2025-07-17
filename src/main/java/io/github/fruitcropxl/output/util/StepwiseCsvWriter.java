@@ -3,6 +3,7 @@ package io.github.fruitcropxl.output.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
  * Each writer instance should only be responsible for one file, utilizing one
  * mapper.
  */
-public class StepwiseCsvWriter {
+public class StepwiseCsvWriter implements Serializable {
     /**
      * The file which the CSV output is written to.
      */
